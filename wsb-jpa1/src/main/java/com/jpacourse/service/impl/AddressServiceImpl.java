@@ -25,14 +25,14 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public AddressTO findById(Long id) {
         final AddressEntity entity = addressDao.findOne(id);
-        return AddressMapper.mapToTO(entity); // Wywołanie metody statycznej
+        return AddressMapper.mapToTO(entity);
     }
 
     @Override
     public List<AddressTO> getAddressesByCity(String city) {
         List<AddressEntity> addressEntities = addressDao.findAddressesByCity(city);
         return addressEntities.stream()
-                .map(AddressMapper::mapToTO) // Wywołanie metody statycznej
+                .map(AddressMapper::mapToTO)
                 .collect(Collectors.toList());
     }
 }
