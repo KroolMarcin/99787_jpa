@@ -1,6 +1,5 @@
-package com.jpacourse.persistance.dao;
+package com.jpacourse.persistence.dao;
 
-import com.jpacourse.persistence.dao.AddressDao;
 import com.jpacourse.persistence.entity.AddressEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +25,7 @@ public class AddressDaoTest
         AddressEntity addressEntity = addressDao.findOne(1L);
         // then
         assertThat(addressEntity).isNotNull();
-        assertThat(addressEntity.getPostalCode()).isEqualTo("62-030");
+        assertThat(addressEntity.getPostalCode()).isEqualTo("11111");
     }
 
     @Test

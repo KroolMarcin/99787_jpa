@@ -9,22 +9,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class AddressServiceImpl implements AddressService
-{
+public class AddressServiceImpl implements AddressService {
     private final AddressDao addressDao;
 
     @Autowired
-    public AddressServiceImpl(AddressDao pAddressDao)
-    {
+    public AddressServiceImpl(AddressDao pAddressDao) {
         addressDao = pAddressDao;
     }
 
     @Override
     public AddressTO findById(Long id) {
         final AddressEntity entity = addressDao.findOne(id);
-        return AddressMapper.mapToTO(entity);
+        return AddressMapper.mapToTO(entity); // Wywołanie metody statycznej
+    }
+
+    @Override
+    public List<AddressTO> getAddressesByCity(String city) {
+        List<AddressEntity> addressEntities = addressDao.findAddressesByCity(city);
+        return addressEntities.stream()
+                .map(AddressMapper::mapToTO) // Wywołanie metody statycznej
+                .collect(Collectors.toList());
     }
 }
